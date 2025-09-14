@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>birthday</title>
+    <title>happy birthday</title>
     <style>
         * {
             margin: 0;
@@ -54,11 +54,14 @@
             backdrop-filter: blur(5px);
             transition: all 0.3s ease;
             margin-top: 20px;
+            text-decoration: none;
+            display: inline-block; 
         }
         
         .btn:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: scale(1.05);
+            text-decoration: none;
         }
         
         /* تصميم القلوب بدل البالونات */
@@ -121,9 +124,9 @@
     <!-- صفحة الدخول -->
     <div class="container" id="entryPage">
         <h1> هل أنتِ مستعدة؟ 🎁</h1>
-<a href="happy birthday.html"><button class="btn" onclick="openMainPage()" type="submit">
+<a href="happy birthday.html" class="btn"> 
             <p>اضغطي هنا</p>
-        </button></a>
+</a>
     </div>
 
     <!-- منطقة القلوب والورود -->
@@ -186,13 +189,6 @@
                 
                 flowersContainer.appendChild(flower);
             });
-        }
-        
-        // الانتقال إلى الصفحة الرئيسية
-        function openMainPage() {
-            alert('سيتم الانتقال إلى الصفحة الرئيسية بعد اكتمال التصميم');
-   document.getElementById('entryPage').style.display = 'none';
-   document.getElementById('mainPage').style.display = 'flex';
         }
         
         // تهيئة الصفحة
