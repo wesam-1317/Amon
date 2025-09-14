@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>ذكرياتنا</title>
+    <style>
+        html { 
+            box-sizing: border-box; 
+            overflow-x: hidden;
+        }
+        
+        *, *::before, *::after { 
+            box-sizing: inherit; 
+        }
+        
+        body { 
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #ff3b3b;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        header {
+            background: rgba(255, 150, 150, 0.9);
+            min-height: 30px;
+            padding: 5px 10px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+        
+        header p {
+            font-weight: bold;
+            font-size: 15px;
+            margin: 0;
+        }
+        
+        .home {
+            width: 25px;
+            height: 25px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        a:hover {
+            text-decoration: none;
+        }
+        
+        .main-wrapper {
+            position: relative;
+            flex: 1;
+        }
+        
+        .memories-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 200, 200, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 3px solid #ff6b6b;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .memories-title {
+            text-align: center;
+            color: #d32f2f;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .memories-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            right: 25%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #d32f2f, transparent);
+        }
+        
+        .memory-item {
+            margin-bottom: 40px;
+        }
+        
+        .memory-media {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+        }
+        
+        .memory-media img {
+            width: 100%;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .memory-media img:hover {
+            transform: scale(1.03);
+        }
+        
+        .memory-media video {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .memory-description {
+            line-height: 1.6;
+            font-size: 16px;
+            text-align: center;
+            padding: 0 10px;
+            color: #5a2a2a;
+        }
+        
+        .memory-divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .memory-divider:before {
+            content: "✦";
+            color: #d32f2f;
+            font-size: 24px;
+            padding: 0 15px;
+            background: rgba(255, 200, 200, 0.95);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .memory-divider:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d32f2f, transparent);
+            z-index: 0;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: floatHeart 8s linear infinite;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .back-btn {
+            display: block;
+            width: 150px;
+            margin: 30px auto;
+            padding: 12px 20px;
+            background: rgba(255, 150, 150, 0.9);
+            color: #fff;
+            text-align: center;
+            border-radius: 30px;
+            font-weight: bold;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 130, 130, 0.9);
+        }
+        
+        footer {
+            background: rgba(255, 150, 150, 0.9);
+            text-align: center;
+            padding: 20px 0px 50px 0px;
+            width: 100%;
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .aaa {
+            font-weight: bold;
+            font-size: 12px;
+            margin: 2px 0;
+        }
+        
+        .aa {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px 0;
+        }
+        
+        /* تصميم الورود */
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            z-index: 1;
+            animation: sway 10s infinite alternate;
+            pointer-events: none;
+        }
+        
+        /* حركة الورود */
+        @keyframes sway {
+            0% {
+                transform: rotate(-180deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+        
+        /* الوردتين الحمر */
+        .red-flower {
+            animation: floatUpDown 7s ease-in-out infinite;
+        }
+        
+        @keyframes floatUpDown {
+            0%   { transform: translateY(0); }
+            25%  { transform: translateY(-10px); }
+            50%  { transform: translateY(10px); }
+            75%  { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* نافذة التكبير للصور */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            text-align: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 80%;
+            margin: 5% auto;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #ff9999;
+        }
+        
+        /* responsive */
+        @media (max-width: 768px) {
+            .memories-container {
+                margin: 15px;
+                padding: 15px;
+            }
+            
+            .memories-title {
+                font-size: 24px;
+            }
+            
+            .memory-description {
+                font-size: 15px;
+            }
+            
+            .flower {
+                font-size: 1.5rem;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 70%;
+            }
+            
+            .close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="home">
+            <a href="index.html"><i id="home" class="fa-solid fa-house"></i></a>
+        </div>
+        <p>13-17</p>
+        <p><img src="Emoji1.png" alt="❤️🫶🏻" style="width:35px;height:35px;"></p>
+    </header>
+    
+    <div class="main-wrapper">
+        <div class="memories-container">
+            <h1 class="memories-title">
+            ذكرياتُنا 🎞
+            </h1>
+            <!--فيديو 1 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23ff9999'/%3E%3Ctext x='400' y='225' dominant-baseline='middle' text-anchor='middle' font-size='24' fill='%23d32f2f'%3E%20%3C/text%3E%3C/svg%3E">
+                        <source src="VID1.mp4" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                </div>
+                <p class="memory-description">هاي هديتي بعيد ميلادك ال27 👀</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+            
+            <!-- فيديو 2 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23ff9999'/%3E%3Ctext x='400' y='225' dominant-baseline='middle' text-anchor='middle' font-size='24' fill='%23d32f2f'%3E%20%3C/text%3E%3C/svg%3E">
+                        <source src="VID3.mp4" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                </div>
+                <p class="memory-description">وهاي هديتي منك بعز امتحانات التوجيهي😂🤍</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+        
+            <!-- فيديو 3 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23ff9999'/%3E%3Ctext x='400' y='225' dominant-baseline='middle' text-anchor='middle' font-size='24' fill='%23d32f2f'%3E%20%3C/text%3E%3C/svg%3E">
+                        <source src="VID2.mp4" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                </div>
+                <p class="memory-description">فيديو ثالث مع وصفه</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+
+            <!-- صورة 1 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <img src="img5.jpg" alt="ذكرى عيد ميلادك ال28">
+                </div>
+                <p class="memory-description">وهاي هديتي بعيد ميلادك ال28🌚</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+            
+            <!-- صورة 2 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <img src="img1.jpg" alt="اول محادثث النا عالسناب">
+                </div>
+                <p class="memory-description"> اول محادثه النا عالسناب👀🤍</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+            
+            <!-- صورة 3 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <img src="img2.jpg" alt="امونتي">
+                </div>
+                <p class="memory-description"> ايام التوجيهي🌚🫶🏻</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+            
+            <!-- صورة 4 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <img src="img3.jpg" alt="اول صوره طبقنا مع بعض فيخا">
+                </div>
+                <p class="memory-description">اول صوره طبقنا مع بعض فيها انا حطيت خلفيه محادثه الواتس حرف A وانتي حرف W 👀</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+            
+            <!-- صورة 5 -->
+            <div class="memory-item">
+                <div class="memory-media">
+                    <img src="img4.jpg" alt="محادثة واتس">
+                </div>
+                <p class="memory-description">شوية زناخة من محادثتنا عالواتس🌚</p>
+            </div>
+            
+            <div class="memory-divider"></div>
+            
+            <p class="memory-description"> في صوره الي عاملين فيها قلب كنت ميت بدي احطها بالموقع بس انتي قلتي امسحها، وبس الفكره من الصفحة هاي بتقدري تفتحيها وتشوفي ذكرياتنا بأي وقت بدك اياه🤍.</p>
+        </div>
+        
+        <a href="happy birthday.html" class="back-btn">العودة إلى  القائمة الرئيسية</a>
+        
+        <!-- حاوية الورود -->
+        <div id="flowersContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></div>
+    </div>
+    
+    <!-- حاوية القلوب الطائرة -->
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- نافذة التكبير للصور -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+    
+    <footer>
+        <p class="aaa">Developed by Wesam Al-Zoubi ©</p>
+        <p class="aa">هذا موقع مخصص لأمون♡</p>
+    </footer>
+    
+    <script>
+        // إنشاء الورود
+        function createFlowers() {
+            const flowersContainer = document.getElementById('flowersContainer');
+            const flowerPositions = [
+                { top: '7%', left: '0%' },
+                { top: '7%', right: '0%' },
+                { top: '42%', left: '0%' },
+                { top: '42%', right: '0%' },
+                { top: '93%', left: '2%' },
+                { top: '93%', right: '2%' }
+            ];
+            
+            flowerPositions.forEach((pos, index) => {
+                const flower = document.createElement('div');
+
+                if (index >= flowerPositions.length - 2) {
+                    flower.classList.add('flower', 'red-flower');
+                    flower.textContent = '🌹'; 
+                } else {
+                    flower.classList.add('flower');
+                    flower.textContent = '🌸';
+                }
+
+                flower.style.top = pos.top || 'auto';
+                flower.style.bottom = pos.bottom || 'auto';
+                flower.style.left = pos.left || 'auto';
+                flower.style.right = pos.right || 'auto';
+
+                flowersContainer.appendChild(flower);
+            });
+        }
+           
+        // إنشاء القلوب باستخدام رموز تعبيرية
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartCount = 20;
+            
+            // رموز القلوب المختلفة
+            const heartSymbols = ['❤️', '🩷', '💝', '💚', '🤍'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // اختيار رمز قلب عشوائي
+                const randomHeart = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.textContent = randomHeart;
+                
+                // توزيع القلوب على عرض الصفحة
+                heart.style.left = Math.random() * 100 + 'vw';
+                
+                // توقيت مختلف لكل قلب
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (10 + Math.random() * 10) + 's';
+                
+                // حجم عشوائي للقلوب
+                const randomSize = 1.5 + Math.random() * 2;
+                heart.style.fontSize = randomSize + 'rem';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // كود إيقاف الفيديوهات الأخرى عند تشغيل فيديو
+        document.addEventListener('play', function(e) {
+            // الحصول على جميع عناصر الفيديو في الصفحة
+            var videos = document.getElementsByTagName('video');
+            
+            // إيقاف جميع الفيديوهات عدا الذي يتم تشغيله الآن
+            for (var i = 0; i < videos.length; i++) {
+                if (videos[i] != e.target) {
+                    videos[i].pause();
+                }
+            }
+        }, true);
+        
+        // كود تكبير الصور
+        document.addEventListener('DOMContentLoaded', function() {
+            // الحصول على العناصر
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("expandedImg");
+            var closeBtn = document.getElementsByClassName("close")[0];
+            
+            // إضافة حدث النقر لجميع الصور
+            var images = document.querySelectorAll('.memory-media img');
+            images.forEach(function(img) {
+                img.addEventListener('click', function() {
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                });
+            });
+            
+            // إغلاق النافذة عند النقر على X
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+            
+            // إغلاق النافذة عند النقر خارج الصورة
+            modal.addEventListener('click', function(e) {
+                if (e.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+            
+            // إغلاق النافذة عند الضغط على زر Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape") {
+                    modal.style.display = "none";
+                }
+            });
+        });
+
+        // تهيئة الصفحة
+        window.onload = function() {
+            createFlowers();
+            createHearts();
+        };
+    </script>
+</body>
+</html>

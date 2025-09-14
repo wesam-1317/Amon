@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>birthday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        html, body {
+  height: 100%;
+  margin:0px;
+  overflow-y:hidden;
+  overflow-x:hidden;
+}
+        body {
+            background: linear-gradient(to bottom, #ff3b3b, #ff6b6b);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* تصميم القلوب بدل البالونات */
+        .heart {
+            position: absolute;
+            bottom: -80px;
+            font-size: 2.5rem;
+            animation: float 15s infinite;
+            z-index: 1;
+            opacity: 0.8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* حركة القلوب - تبدأ من الأسفل وتصعد للأعلى */
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(calc(-50vw + 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* تصميم الورود */
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            z-index: 1;
+            animation: sway 10s infinite alternate;
+        }
+        
+        @keyframes sway {
+            0% { transform: rotate(-15deg); }
+            100% { transform: rotate(15deg); }
+        }
+        
+        /* responsive design */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 6rem;
+            }
+            
+            .btn {
+                font-size: 4.5rem;
+            }
+            
+            .heart {
+                font-size: 6rem;
+            }
+            .flower {
+                font-size:6rem; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحة الدخول -->
+    <div class="container" id="entryPage">
+        <h1> هل أنتِ مستعدة؟ 🎁</h1>
+<a href="happy birthday.html"><button class="btn" onclick="openMainPage()" type="submit">
+            <p>اضغطي هنا</p>
+        </button></a>
+    </div>
+
+    <!-- منطقة القلوب والورود -->
+    <div id="heartsContainer"></div>
+    <div id="flowersContainer"></div>
+ <script>
+           
+       // إنشاء القلوب باستخدام رموز تعبيرية
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartCount = 20;
+            
+            // رموز القلوب المختلفة
+            const heartSymbols = ['❤️', '🩷', '💝', '💚', '🤍'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // اختيار رمز قلب عشوائي
+                const randomHeart = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.textContent = randomHeart;
+                
+                // توزيع القلوب على عرض الصفحة
+                heart.style.left = Math.random() * 100 + 'vw';
+                
+                // توقيت مختلف لكل قلب
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (10 + Math.random() * 10) + 's';
+                
+                // حجم عشوائي للقلوب
+                const randomSize = 1.5 + Math.random() * 2;
+                heart.style.fontSize = randomSize + 'rem';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // إنشاء الورود
+        function createFlowers() {
+            const flowersContainer = document.getElementById('flowersContainer');
+            const flowerPositions = [
+                { top: '10%', left: '10%' },
+                { top: '15%', right: '15%' },
+                { top: '80%', left: '20%' },
+                { bottom: '10%', right: '10%' },
+                { top: '30%', left: '5%' },
+                { bottom: '20%', right: '20%' }
+            ];
+            
+            flowerPositions.forEach(pos => {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                flower.textContent = '🌸';
+                
+                flower.style.top = pos.top || 'auto';
+                flower.style.bottom = pos.bottom || 'auto';
+                flower.style.left = pos.left || 'auto';
+                flower.style.right = pos.right || 'auto';
+                
+                flowersContainer.appendChild(flower);
+            });
+        }
+        
+        // الانتقال إلى الصفحة الرئيسية
+        function openMainPage() {
+            alert('سيتم الانتقال إلى الصفحة الرئيسية بعد اكتمال التصميم');
+   document.getElementById('entryPage').style.display = 'none';
+   document.getElementById('mainPage').style.display = 'flex';
+        }
+        
+        // تهيئة الصفحة
+        window.onload = function() {
+            createHearts();
+            createFlowers();
+        };
+ </script>
+</body>
+</html>

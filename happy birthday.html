@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>مفاجأة عيد الميلاد!</title>
+    <style>
+html { box-sizing: border-box; overflow-x: hidden; } /* يمنع سكرول عرضي */
+*, *::before, *::after { box-sizing: inherit; }
+
+body { margin: 0; } /* بس نشيل المارجن الافتراضي للصفحة */
+header, footer { max-width: 100vw; } /* احترازياً ما يتعدّوا عرض الشاشة */
+html, body {
+  height: 100%;
+  margin:0px;
+  overflow-y:hidden;
+  overflow-x:hidden;
+}
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ff3b3b;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(255, 150, 150, 0.9);
+           min-height:30px;
+            padding: 5px 10px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom:5px;
+            overflow:hidden;
+        }
+        
+        header p {
+            font-weight: bold;
+            font-size: 15px;
+            margin: 0;
+        }
+        
+        .home {
+            width: 25px;
+            height: 25px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        a:hover {
+            text-decoration: none;
+        }
+        
+        .main-content {
+            padding: 20px;
+        text-align:center;
+        margin-bottom:10px;
+        }
+        
+        .boxes-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .box {
+            background: rgba(255, 150, 150, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            border: 2px solid white;
+            flex: 1;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .box h1 {
+            margin-top: 0;
+        }
+        
+        footer {
+            background: rgba(255, 150, 150, 0.9);
+            text-align: center;
+            padding: 20px 0px 50px 0px;
+            width: 100%; 
+        }
+        
+        .aaa {
+            font-weight: bold;
+            font-size: 12px;
+            margin: 2px 0;
+        }
+        
+        .aa {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px 0;
+        }
+        
+        /* تصميم الورود - التعديل هنا */
+        .flower {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.6;
+            z-index: 1;
+            animation: sway 10s infinite alternate;
+            pointer-events: none;
+        }
+        
+        /* حركة الورود */
+        @keyframes sway {
+            0% {
+                transform: rotate(-180deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+        /* الوردتين الحمر */
+.red-flower {
+    animation: floatUpDown 7s ease-in-out 2; /* تتحرك مرتين بس */
+}
+@keyframes floatUpDown {
+    0%   { transform: translateY(0); }
+    25%  { transform: translateY(-10px); }  /* تصعد */
+    50%  { transform: translateY(10px); }   /* تنزل */
+    75%  { transform: translateY(-10px); }  /* تصعد مرة ثانية */
+    100% { transform: translateY(0); }     /* ترجع لنقطة البداية */  
+} 
+    
+        /* responsive */
+        @media (max-width: 768px) {
+            .boxes-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .box {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="home">
+            <a href="index.html"><i id="home" class="fa-solid fa-house"></i></a>
+        </div>
+        <p>13-17</p>
+        <p><img src="Emoji1.png" alt="❤️🫶🏻" style="width:35px;height:35px;"></p>
+    </header>
+    
+    <div class="main-content">
+        <div class="boxes-container">
+            <!-- مربع الرسالة -->
+            <a class="box" href="My message.html">
+                <div>
+                    <h1>💌 رسالتي لكِ</h1>
+                    <p>رِسالَةٌ نابعةٌ من قلبٍ مُحب ♡</p>  <p style="color:#2d3853;">
+                    اضغطي على هذا المستطيل للمشاهده
+                    </p>
+                </div>
+            </a>
+            
+            <!-- مربع الذكريات -->
+            <a class="box" href="Our memories.html">
+                <div>
+                    <h1>🎞 ذِكرَياتُنا</h1>
+                    <p>ذكرَيات ذهبت ولم تعوّد، وأصبحت من الماضي كما ستُصبحُ علاقتُنا في يوماً من الأيام من الماضي ♡
+                </p>
+                    <p style="color:#2d3853;">
+                    اضغطي على هذا المستطيل للمشاهده</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- حاوية الورود -->
+    <div id="flowersContainer"></div>
+    
+    <footer>
+        <p class="aaa">Developed by Wesam Al-Zoubi ©</p>
+        <p class="aa">هذا موقع مخصص لأمون♡</p>
+    </footer>
+ <script>
+    // إنشاء الورود
+    function createFlowers() {
+        const flowersContainer = document.getElementById('flowersContainer');
+        const flowerPositions = [
+            { top: '7%', left: '0%' },
+            { top: '7%', right: '0%' },
+            { top: '42%', left: '0%' },
+            { top: '42%', right: '0%' },
+            { top: '93%', left: '2%' },   // الخامسة (أول حمرا)
+            { top: '93%', right: '2%' }   // السادسة (ثانية حمرا)
+        ];
+        
+        flowerPositions.forEach((pos, index) => {
+            const flower = document.createElement('div');
+
+            // لو آخر وردتين
+            if (index >= flowerPositions.length - 2) {
+                flower.classList.add('flower', 'red-flower');
+                flower.textContent = '🌹'; 
+            } else {
+                flower.classList.add('flower');
+                flower.textContent = '🌸';
+            }
+
+            flower.style.top = pos.top || 'auto';
+            flower.style.bottom = pos.bottom || 'auto';
+            flower.style.left = pos.left || 'auto';
+            flower.style.right = pos.right || 'auto';
+
+            flowersContainer.appendChild(flower);
+        });
+    }
+
+    // تهيئة الصفحة
+    window.onload = function() {
+        createFlowers();
+    };
+</script>
+</body>
+</html>
